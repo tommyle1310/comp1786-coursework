@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="teachers_array">
+        <item>Select Teacher</item>
+        <item>Tammy Tao</item>
+        <item>John Doe</item>
+    </string-array>
+
+    <string-array name="duration_array">
+        <item>Select Duration</item>
+        <item>30 minutes</item>
+        <item>60 minutes</item>
+        <item>90 minutes</item>
+    </string-array>
+</resources>
