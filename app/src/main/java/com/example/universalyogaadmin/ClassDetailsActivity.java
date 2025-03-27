@@ -1,12 +1,15 @@
 package com.example.universalyogaadmin;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ClassDetailsActivity extends AppCompatActivity {
 
-    private TextView teacherNameTextView, classNameTextView, classTypeTextView, classTimeTextView, capacityTextView, durationTextView, priceTextView, descriptionTextView;
+    private ImageView classImageView;
+    private TextView teacherNameTextView, classNameTextView, classTypeTextView, classTimeTextView, priceTextView, capacityTextView, durationTextView, descriptionTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,33 +17,40 @@ public class ClassDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_class_details);
 
         // Ánh xạ các view
-        classNameTextView = findViewById(R.id.detailClassNameTextView);
-        classTypeTextView = findViewById(R.id.detailClassTypeTextView);
-        teacherNameTextView = findViewById(R.id.detailTeacherNameTextView);
-        classTimeTextView = findViewById(R.id.detailClassTimeTextView);
-        capacityTextView = findViewById(R.id.detailCapacityTextView);
-        durationTextView = findViewById(R.id.detailDurationTextView);
-        priceTextView = findViewById(R.id.detailPriceTextView);
-        descriptionTextView = findViewById(R.id.detailDescriptionTextView);
+        classImageView = findViewById(R.id.classImageView);
+        teacherNameTextView = findViewById(R.id.teacherNameTextView);
+        classNameTextView = findViewById(R.id.classNameTextView);
+        classTypeTextView = findViewById(R.id.classTypeTextView);
+        classTimeTextView = findViewById(R.id.classTimeTextView);
+        priceTextView = findViewById(R.id.priceTextView);
+        capacityTextView = findViewById(R.id.capacityTextView);
+        durationTextView = findViewById(R.id.durationTextView);
+        descriptionTextView = findViewById(R.id.descriptionTextView);
 
         // Lấy dữ liệu từ Intent
+        String teacherName = getIntent().getStringExtra("teacherName");
         String className = getIntent().getStringExtra("className");
         String classType = getIntent().getStringExtra("classType");
-        String teacherName = getIntent().getStringExtra("teacherName");
         String classTime = getIntent().getStringExtra("classTime");
+        int price = getIntent().getIntExtra("price", 0);
         int capacity = getIntent().getIntExtra("capacity", 0);
         String duration = getIntent().getStringExtra("duration");
-        int price = getIntent().getIntExtra("price", 0);
         String description = getIntent().getStringExtra("description");
+        String imageUriString = getIntent().getStringExtra("imageUri");
 
         // Hiển thị dữ liệu
+        teacherNameTextView.setText(teacherName);
         classNameTextView.setText(className);
         classTypeTextView.setText(classType);
-        teacherNameTextView.setText(teacherName);
         classTimeTextView.setText(classTime);
-        capacityTextView.setText(String.valueOf(capacity));
-        durationTextView.setText(duration);
         priceTextView.setText("$" + price);
+        capacityTextView.setText(capacity + " people");
+        durationTextView.setText(duration);
         descriptionTextView.setText(description);
+
+        // Hiển thị hình ảnh
+        if (imageUriString != null) {
+            classImageView.setImageURI(Uri.parse(imageUriString));
+        }
     }
 }

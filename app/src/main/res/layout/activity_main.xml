@@ -49,14 +49,27 @@
             android:paddingStart="8dp"/>
     </LinearLayout>
 
+    <!-- View More -->
+    <TextView
+        android:id="@+id/viewMoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchLayout"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="View more"
+        android:textColor="@color/primary"
+        android:textSize="14sp"/>
+
     <!-- Danh sách lớp -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/classRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/searchLayout"
+        android:layout_below="@id/viewMoreTextView"
         android:layout_above="@id/bottomNavigation"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"/>

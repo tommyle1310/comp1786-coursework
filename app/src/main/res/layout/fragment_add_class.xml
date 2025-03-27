@@ -24,7 +24,9 @@
             android:layout_height="100dp"
             android:src="@drawable/ic_teacher_placeholder"
             android:layout_gravity="center"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/image_border"
+            android:padding="2dp"/>
 
         <Button
             android:id="@+id/selectImageButton"

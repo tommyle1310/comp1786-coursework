@@ -9,149 +9,150 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Class Name -->
+        <!-- Class Image -->
+        <ImageView
+            android:id="@+id/classImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_teacher_placeholder"
+            android:background="@drawable/image_border"
+            android:padding="2dp"/>
+
+        <!-- Teacher Name -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Class Name"
+            android:text="Teacher:"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/detailClassNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Class Name"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Class Type -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Class Type"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
-
-        <TextView
-            android:id="@+id/detailClassTypeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Class Type"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Teacher -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Teacher"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
-
-        <TextView
-            android:id="@+id/detailTeacherNameTextView"
+            android:id="@+id/teacherNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Teacher Name"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="8dp"/>
 
-        <!-- Time -->
+        <!-- Class Name -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time"
+            android:text="Class Name:"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/detailClassTimeTextView"
+            android:id="@+id/classNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Class Name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Class Type -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Class Type:"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/classTypeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Class Type"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Class Time -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time:"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/classTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Class Time"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Capacity -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Capacity"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
-
-        <TextView
-            android:id="@+id/detailCapacityTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Capacity"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Duration -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Duration"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
-
-        <TextView
-            android:id="@+id/detailDurationTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Duration"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="8dp"/>
 
         <!-- Price -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price"
+            android:text="Price:"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/detailPriceTextView"
+            android:id="@+id/priceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Price"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Capacity -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Capacity:"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/capacityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Capacity"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Duration -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration:"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/durationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
 
         <!-- Description -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"
+            android:text="Description:"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/detailDescriptionTextView"
+            android:id="@+id/descriptionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
-
+            android:textSize="16sp"/>
     </LinearLayout>
 </ScrollView>

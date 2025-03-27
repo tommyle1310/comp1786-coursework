@@ -72,14 +72,14 @@
             android:inputType="phone"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Add Teacher Button -->
+        <!-- Update Teacher Button -->
         <Button
-            android:id="@+id/addTeacherButton"
+            android:id="@+id/updateTeacherButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/primary"
-            android:text="Add Teacher"
+            android:text="Update Teacher"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 </ScrollView>

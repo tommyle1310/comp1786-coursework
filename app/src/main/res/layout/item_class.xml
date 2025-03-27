@@ -3,103 +3,96 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp"
+    android:padding="16dp"
     android:background="@drawable/rounded_background"
     android:layout_marginBottom="8dp"
-    android:gravity="center_vertical">
+    android:elevation="2dp">
 
-    <!-- Teacher Avatar -->
+    <!-- Ảnh của lớp học (bên trái) -->
     <ImageView
-        android:id="@+id/teacherAvatar"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/ic_teacher_placeholder"
-        android:layout_marginEnd="16dp"/>
+        android:id="@+id/classImageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/circle_background"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_image" />
 
-    <!-- Class Info -->
+    <!-- Thông tin lớp học (bên phải, chia thành 2 cột) -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:elevation="3dp"
+        android:orientation="horizontal">
 
-        <!-- Class Name, Price, and Icons -->
+        <!-- Cột 1: className và price -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/classNameTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Class Name"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/classPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price"
-                android:textColor="@android:color/black"
+                android:text="Class Name"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginEnd="8dp"/>
+                android:textColor="@android:color/black" />
 
-            <!-- Edit Icon (Pen) -->
-            <ImageView
-                android:id="@+id/editIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_edit"
-                android:tint="@color/secondary"
-                android:layout_marginEnd="8dp"/>
-
-            <!-- Delete Icon (Trash) -->
-            <ImageView
-                android:id="@+id/deleteIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_delete"
-                android:tint="@color/danger"/>
+            <TextView
+                android:id="@+id/priceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="$20"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
-        <!-- Capacity, Time, and Days -->
+        <!-- Cột 2: capacity và time -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="4dp">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="end">
 
             <TextView
-                android:id="@+id/classCapacityTextView"
+                android:id="@+id/capacityTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Capacity"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp"
-                android:layout_marginEnd="8dp"/>
+                android:text="30 people"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
 
             <TextView
-                android:id="@+id/classTimeTextView"
+                android:id="@+id/timeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Class Time"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp"
-                android:layout_marginEnd="8dp"/>
-
-            <TextView
-                android:id="@+id/classDaysTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="[Days]"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp"/>
+                android:layout_marginTop="4dp"
+                android:text="10:00AM - 11:00AM"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
         </LinearLayout>
     </LinearLayout>
+
+    <!-- Icon Edit và Delete (ẩn đi) -->
+    <ImageView
+        android:id="@+id/editIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/ic_menu_edit"
+        android:visibility="gone"
+        android:layout_marginEnd="8dp" />
+
+    <ImageView
+        android:id="@+id/deleteIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/ic_menu_delete"
+        android:visibility="gone" />
+
 </LinearLayout>

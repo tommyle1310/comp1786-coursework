@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
+
     private List<YogaClass> classList;
     private OnClassClickListener listener;
 
     public interface OnClassClickListener {
         void onClassClick(YogaClass yogaClass);
-        void onEditClick(YogaClass yogaClass);
-        void onDeleteClick(YogaClass yogaClass);
+        void onEditClick(YogaClass yogaClass); // Không sử dụng trong MainActivity và ListClassActivity
+        void onDeleteClick(YogaClass yogaClass); // Không sử dụng trong MainActivity và ListClassActivity
     }
 
     public ClassAdapter(List<YogaClass> classList, OnClassClickListener listener) {
@@ -27,48 +28,63 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
     @NonNull
     @Override
     public ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_class, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_class, parent, false);
         return new ClassViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
         YogaClass yogaClass = classList.get(position);
-        holder.classNameTextView.setText(yogaClass.getClassName());
-        holder.classPriceTextView.setText("$" + yogaClass.getPrice());
-        holder.classCapacityTextView.setText(yogaClass.getCapacity() + " people");
-        holder.classTimeTextView.setText(yogaClass.getClassTime());
-        holder.classDaysTextView.setText("[" + yogaClass.getDays() + "]");
+        // Hiển thị thông tin theo Figma
+        if (holder.classNameTextView != null) {
+            holder.classNameTextView.setText(yogaClass.getClassName());
+        }
+        if (holder.priceTextView != null) {
+            holder.priceTextView.setText("$" + yogaClass.getPrice());
+        }
+        if (holder.capacityTextView != null) {
+            holder.capacityTextView.setText(yogaClass.getCapacity() + " people");
+        }
+        if (holder.timeTextView != null) {
+            holder.timeTextView.setText(yogaClass.getClassTime());
+        }
 
-        // Nhấn vào toàn bộ card để mở ClassDetailsActivity
+        // Hiển thị ảnh của lớp học
+        if (holder.classImageView != null) {
+            if (yogaClass.getImageUri() != null) {
+                android.util.Log.d("ClassAdapter", "Loading image URI: " + yogaClass.getImageUri());
+                try {
+                    holder.classImageView.setImageURI(yogaClass.getImageUri());
+                } catch (SecurityException e) {
+                    holder.classImageView.setImageResource(R.drawable.default_image);
+                    android.util.Log.e("ClassAdapter", "Failed to load class image: " + yogaClass.getImageUri(), e);
+                }
+            } else {
+                android.util.Log.d("ClassAdapter", "Image URI is null for class: " + yogaClass.getClassName());
+                holder.classImageView.setImageResource(R.drawable.default_image);
+            }
+        }
+
         holder.itemView.setOnClickListener(v -> listener.onClassClick(yogaClass));
-
-        // Nhấn vào icon Edit
-        holder.editIcon.setOnClickListener(v -> listener.onEditClick(yogaClass));
-
-        // Nhấn vào icon Delete
-        holder.deleteIcon.setOnClickListener(v -> listener.onDeleteClick(yogaClass));
     }
 
     @Override
     public int getItemCount() {
-        return classList.size();
+        return classList != null ? classList.size() : 0;
     }
 
     static class ClassViewHolder extends RecyclerView.ViewHolder {
-        ImageView teacherAvatar, editIcon, deleteIcon;
-        TextView classNameTextView, classPriceTextView, classCapacityTextView, classTimeTextView, classDaysTextView;
+        ImageView classImageView;
+        TextView classNameTextView, priceTextView, capacityTextView, timeTextView;
 
         public ClassViewHolder(@NonNull View itemView) {
             super(itemView);
-            teacherAvatar = itemView.findViewById(R.id.teacherAvatar);
+            classImageView = itemView.findViewById(R.id.classImageView);
             classNameTextView = itemView.findViewById(R.id.classNameTextView);
-            classPriceTextView = itemView.findViewById(R.id.classPriceTextView);
-            classCapacityTextView = itemView.findViewById(R.id.classCapacityTextView);
-            classTimeTextView = itemView.findViewById(R.id.classTimeTextView);
-            classDaysTextView = itemView.findViewById(R.id.classDaysTextView);
-            editIcon = itemView.findViewById(R.id.editIcon);
-            deleteIcon = itemView.findViewById(R.id.deleteIcon);
+            priceTextView = itemView.findViewById(R.id.priceTextView);
+            capacityTextView = itemView.findViewById(R.id.capacityTextView);
+            timeTextView = itemView.findViewById(R.id.timeTextView);
         }
     }
 }
