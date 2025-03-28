@@ -62,6 +62,18 @@
         android:textColor="@color/primary"
         android:textSize="14sp"/>
 
+    <!-- Thêm nút Sync to Cloud -->
+    <Button
+        android:id="@+id/syncToCloudButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewMoreTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/primary"
+        android:text="Sync to Cloud"
+        android:textColor="@android:color/white" />
+
     <!-- Danh sách lớp -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/classRecyclerView"

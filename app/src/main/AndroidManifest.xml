@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,12 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ClassDetailsActivity" />
-        <activity android:name=".SettingsActivity" />
         <activity android:name=".ListClassActivity" />
-        <activity android:name=".EditClassActivity" />
         <activity android:name=".ListTeacherActivity" />
-        <activity android:name=".EditTeacherActivity" />
         <activity android:name=".AddTeacherActivity" />
+        <activity android:name=".EditTeacherActivity" />
+        <activity android:name=".ClassDetailsActivity" />
+        <activity android:name=".EditClassActivity" />
+        <activity android:name=".ClassInstancesActivity" />
+        <activity android:name=".AddClassInstanceActivity" />
+        <activity android:name=".EditClassInstanceActivity" />
     </application>
 </manifest>

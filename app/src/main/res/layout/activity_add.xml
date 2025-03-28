@@ -82,6 +82,23 @@
             android:hint="e.g., 10:00AM - 11:00AM"
             android:layout_marginTop="4dp" />
 
+        <!-- Day of Week (Spinner) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day of Week"
+            android:textSize="14sp"
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="8dp" />
+
+        <Spinner
+            android:id="@+id/dayOfWeekSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            android:layout_marginTop="4dp" />
+
         <!-- Price -->
         <TextView
             android:layout_width="wrap_content"
@@ -122,7 +139,7 @@
             android:inputType="number"
             android:layout_marginTop="4dp" />
 
-        <!-- Duration -->
+        <!-- Duration (Spinner) -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -131,14 +148,12 @@
             android:textColor="@color/text_primary"
             android:layout_marginTop="8dp" />
 
-        <EditText
-            android:id="@+id/durationEditText"
+        <Spinner
+            android:id="@+id/durationSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_primary"
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
-            android:hint="Enter duration"
             android:layout_marginTop="4dp" />
 
         <!-- Description -->

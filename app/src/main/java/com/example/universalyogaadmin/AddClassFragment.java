@@ -24,7 +24,7 @@ import java.util.List;
 public class AddClassFragment extends Fragment {
 
     private EditText classNameEditText, classTypeEditText, timeEditText, capacityEditText, priceEditText, descriptionEditText;
-    private Spinner teacherSpinner, durationSpinner;
+    private Spinner teacherSpinner, durationSpinner, dayOfWeekSpinner;
     private Button addClassButton, selectImageButton;
     private ImageView courseImageView;
     private Uri imageUri;
@@ -63,10 +63,20 @@ public class AddClassFragment extends Fragment {
         priceEditText = view.findViewById(R.id.priceEditText);
         descriptionEditText = view.findViewById(R.id.descriptionEditText);
         addClassButton = view.findViewById(R.id.addClassButton);
+        dayOfWeekSpinner = view.findViewById(R.id.dayOfWeekSpinner);
 
         selectImageButton.setOnClickListener(v -> pickImageLauncher.launch("image/*"));
 
-        // Setup Spinner cho Teacher (dùng danh sách từ database)
+        // Setup Spinner cho Day of the Week
+        ArrayAdapter<CharSequence> dayOfWeekAdapter = ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.days_of_week,
+                R.layout.spinner_item
+        );
+        dayOfWeekAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        dayOfWeekSpinner.setAdapter(dayOfWeekAdapter);
+
+        // Setup Spinner cho Teacher
         List<Teacher> teacherList = dbHelper.getAllTeachers();
         ArrayAdapter<Teacher> teacherAdapter = new ArrayAdapter<>(
                 requireContext(),
@@ -86,6 +96,7 @@ public class AddClassFragment extends Fragment {
         durationSpinner.setAdapter(durationAdapter);
 
         addClassButton.setOnClickListener(v -> {
+            String dayOfWeek = dayOfWeekSpinner.getSelectedItem().toString();
             String className = classNameEditText.getText().toString().trim();
             String classType = classTypeEditText.getText().toString().trim();
             Teacher selectedTeacher = (Teacher) teacherSpinner.getSelectedItem();
@@ -96,8 +107,9 @@ public class AddClassFragment extends Fragment {
             String duration = durationSpinner.getSelectedItem().toString();
             String description = descriptionEditText.getText().toString().trim();
 
-            if (className.isEmpty() || classType.isEmpty() || teacherName.isEmpty() || classTime.isEmpty() || capacityStr.isEmpty() || priceStr.isEmpty() || description.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            // Kiểm tra dữ liệu đầu vào
+            if (dayOfWeek.isEmpty() || className.isEmpty() || classType.isEmpty() || teacherName.isEmpty() || classTime.isEmpty() || capacityStr.isEmpty() || priceStr.isEmpty() || duration.isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -110,11 +122,14 @@ public class AddClassFragment extends Fragment {
                 return;
             }
 
+            // Tạo đối tượng YogaClass
             YogaClass yogaClass = new YogaClass(teacherName, className, classType, classTime, price, capacity, duration, description);
+            yogaClass.setDayOfWeek(dayOfWeek);
             if (imageFile != null) {
                 yogaClass.setImageUri(Uri.fromFile(imageFile));
             }
 
+            // Lưu vào database
             long id = dbHelper.addClass(yogaClass);
             if (id != -1) {
                 Toast.makeText(requireContext(), "Class added successfully", Toast.LENGTH_SHORT).show();

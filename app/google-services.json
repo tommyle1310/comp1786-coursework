@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "784978228329",
+    "firebase_url": "https://universalyogaadmin-73428-default-rtdb.firebaseio.com",
+    "project_id": "universalyogaadmin-73428",
+    "storage_bucket": "universalyogaadmin-73428.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784978228329:android:b780fceeb0079561f85ef8",
+        "android_client_info": {
+          "package_name": "com.example.universalyogaadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD72DEOORWP4RjQ37FWI1hL5POPih6sCSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

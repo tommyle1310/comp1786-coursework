@@ -30,26 +30,22 @@ public class ListClassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_class);
 
-        // Khởi tạo DatabaseHelper
         dbHelper = new DatabaseHelper(this);
 
         recyclerView = findViewById(R.id.classRecyclerView);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         addClassFab = findViewById(R.id.addClassFab);
 
-        // Kiểm tra và yêu cầu quyền
         if (checkPermission()) {
             setupRecyclerView();
         } else {
             requestPermission();
         }
 
-        // Xử lý FAB để mở AddActivity
         addClassFab.setOnClickListener(v -> {
             startActivity(new Intent(ListClassActivity.this, AddActivity.class));
         });
 
-        // Bottom Navigation
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_home) {
@@ -70,7 +66,6 @@ public class ListClassActivity extends AppCompatActivity {
             return false;
         });
 
-        // Đặt item được chọn là Classes
         bottomNavigationView.setSelectedItemId(R.id.nav_classes);
     }
 
@@ -119,6 +114,7 @@ public class ListClassActivity extends AppCompatActivity {
                 intent.putExtra("capacity", yogaClass.getCapacity());
                 intent.putExtra("duration", yogaClass.getDuration());
                 intent.putExtra("description", yogaClass.getDescription());
+                intent.putExtra("dayOfWeek", yogaClass.getDayOfWeek());
                 String imageUriString = yogaClass.getImageUri() != null ? yogaClass.getImageUri().toString() : null;
                 intent.putExtra("imageUri", imageUriString);
                 startActivity(intent);
@@ -132,6 +128,7 @@ public class ListClassActivity extends AppCompatActivity {
                 intent.putExtra("className", yogaClass.getClassName());
                 intent.putExtra("classType", yogaClass.getClassType());
                 intent.putExtra("classTime", yogaClass.getClassTime());
+                intent.putExtra("dayOfWeek", yogaClass.getDayOfWeek());
                 intent.putExtra("price", yogaClass.getPrice());
                 intent.putExtra("capacity", yogaClass.getCapacity());
                 intent.putExtra("duration", yogaClass.getDuration());
@@ -147,6 +144,13 @@ public class ListClassActivity extends AppCompatActivity {
                 classList.remove(yogaClass);
                 adapter.notifyDataSetChanged();
                 Toast.makeText(ListClassActivity.this, "Class deleted successfully", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onViewInstancesClick(YogaClass yogaClass) {
+                Intent intent = new Intent(ListClassActivity.this, ClassInstancesActivity.class);
+                intent.putExtra("classId", yogaClass.getId());
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
