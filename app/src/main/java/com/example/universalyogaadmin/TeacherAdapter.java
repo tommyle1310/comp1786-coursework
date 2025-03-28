@@ -3,7 +3,7 @@ package com.example.universalyogaadmin;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,21 +36,23 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
     public void onBindViewHolder(@NonNull TeacherViewHolder holder, int position) {
         Teacher teacher = teacherList.get(position);
         android.util.Log.d("TeacherAdapter", "onBindViewHolder: position = " + position + ", name = " + teacher.getName());
+
+        // Gán dữ liệu cho các view
         if (holder.teacherNameTextView != null) {
             holder.teacherNameTextView.setText(teacher.getName());
         }
-        if (holder.teacherEmailTextView != null) {
-            holder.teacherEmailTextView.setText(teacher.getEmail());
-        }
-        if (holder.teacherPhoneTextView != null) {
-            holder.teacherPhoneTextView.setText(teacher.getPhone());
+        if (holder.teacherContactTextView != null) {
+            holder.teacherContactTextView.setText(teacher.getEmail() + " - " + teacher.getPhone());
         }
 
-        if (holder.editButton != null) {
-            holder.editButton.setOnClickListener(v -> listener.onEditClick(teacher));
+        // Gán sự kiện click cho icon Edit
+        if (holder.editIcon != null) {
+            holder.editIcon.setOnClickListener(v -> listener.onEditClick(teacher));
         }
-        if (holder.deleteButton != null) {
-            holder.deleteButton.setOnClickListener(v -> listener.onDeleteClick(teacher));
+
+        // Gán sự kiện click cho icon Delete
+        if (holder.deleteIcon != null) {
+            holder.deleteIcon.setOnClickListener(v -> listener.onDeleteClick(teacher));
         }
     }
 
@@ -60,16 +62,16 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
     }
 
     static class TeacherViewHolder extends RecyclerView.ViewHolder {
-        TextView teacherNameTextView, teacherEmailTextView, teacherPhoneTextView;
-        Button editButton, deleteButton;
+        TextView teacherNameTextView, teacherContactTextView;
+        ImageView teacherImageView, editIcon, deleteIcon;
 
         public TeacherViewHolder(@NonNull View itemView) {
             super(itemView);
             teacherNameTextView = itemView.findViewById(R.id.teacherNameTextView);
-            teacherEmailTextView = itemView.findViewById(R.id.teacherEmailTextView);
-            teacherPhoneTextView = itemView.findViewById(R.id.teacherPhoneTextView);
-            editButton = itemView.findViewById(R.id.editButton);
-            deleteButton = itemView.findViewById(R.id.deleteButton);
+            teacherContactTextView = itemView.findViewById(R.id.teacherContactTextView);
+            teacherImageView = itemView.findViewById(R.id.teacherImageView);
+            editIcon = itemView.findViewById(R.id.editIcon);
+            deleteIcon = itemView.findViewById(R.id.deleteIcon);
         }
     }
 }

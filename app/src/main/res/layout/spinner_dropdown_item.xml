@@ -2,7 +2,11 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="1dp"
     android:background="@android:color/white"
-    android:padding="8dp"
+    android:backgroundTint="@android:color/transparent"
+    android:ellipsize="end"
+    android:padding="12dp"
+    android:singleLine="true"
     android:textColor="@android:color/black"
     android:textSize="16sp" />

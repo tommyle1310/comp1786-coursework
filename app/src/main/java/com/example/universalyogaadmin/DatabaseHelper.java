@@ -11,7 +11,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "YogaClasses.db";
-    private static final int DATABASE_VERSION = 2; // Tăng từ 1 lên 2
+    private static final int DATABASE_VERSION = 3; // Tăng version lên 3 vì thay đổi schema
 
     // Bảng Classes
     private static final String TABLE_CLASSES = "classes";
@@ -25,15 +25,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DURATION = "duration";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_IMAGE_URI = "imageUri";
-
-    private static final String COLUMN_TEACHER_IMAGE_URI = "teacher_image_uri";
-
     // Bảng Teachers
     private static final String TABLE_TEACHERS = "teachers";
     private static final String COLUMN_TEACHER_ID = "teacherId";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_EMAIL = "email";
     private static final String COLUMN_PHONE = "phone";
+    private static final String COLUMN_TEACHER_IMAGE_URI = "imageUri"; // Thêm cột imageUri
 
     // Câu lệnh tạo bảng Classes
     private static final String CREATE_TABLE_CLASSES = "CREATE TABLE " + TABLE_CLASSES + " (" +
@@ -53,7 +51,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             COLUMN_TEACHER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_NAME + " TEXT, " +
             COLUMN_EMAIL + " TEXT, " +
-            COLUMN_PHONE + " TEXT)";
+            COLUMN_PHONE + " TEXT, " +
+            COLUMN_TEACHER_IMAGE_URI + " TEXT)"; // Thêm cột imageUri
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -69,12 +68,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NAME, "Tammy Tao");
         values.put(COLUMN_EMAIL, "tammy@example.com");
         values.put(COLUMN_PHONE, "123-456-7890");
+        values.put(COLUMN_TEACHER_IMAGE_URI, ""); // Để trống hoặc thêm URI ảnh nếu có
         db.insert(TABLE_TEACHERS, null, values);
 
         values.clear();
         values.put(COLUMN_NAME, "John Doe");
         values.put(COLUMN_EMAIL, "john@example.com");
         values.put(COLUMN_PHONE, "987-654-3210");
+        values.put(COLUMN_TEACHER_IMAGE_URI, "");
         db.insert(TABLE_TEACHERS, null, values);
     }
 
@@ -146,7 +147,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_CAPACITY, yogaClass.getCapacity());
         values.put(COLUMN_DURATION, yogaClass.getDuration());
         values.put(COLUMN_DESCRIPTION, yogaClass.getDescription());
-        // Ép kiểu rõ ràng thành String để tránh lỗi ambiguous
         String imageUriString = yogaClass.getImageUri() != null ? yogaClass.getImageUri().toString() : null;
         values.put(COLUMN_IMAGE_URI, imageUriString);
         int rowsAffected = db.update(TABLE_CLASSES, values, COLUMN_ID + " = ?",
@@ -168,7 +168,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NAME, teacher.getName());
         values.put(COLUMN_EMAIL, teacher.getEmail());
         values.put(COLUMN_PHONE, teacher.getPhone());
-
+        values.put(COLUMN_TEACHER_IMAGE_URI, teacher.getImageUri() != null ? teacher.getImageUri().toString() : null);
         long id = db.insert(TABLE_TEACHERS, null, values);
         android.util.Log.d("DatabaseHelper", "addTeacher: id = " + id);
         db.close();
@@ -188,6 +188,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         cursor.getString(cursor.getColumnIndex(COLUMN_PHONE))
                 );
                 teacher.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_TEACHER_ID)));
+                String imageUriString = cursor.getString(cursor.getColumnIndex(COLUMN_TEACHER_IMAGE_URI));
+                if (imageUriString != null && !imageUriString.isEmpty()) {
+                    teacher.setImageUri(android.net.Uri.parse(imageUriString));
+                }
                 teacherList.add(teacher);
             } while (cursor.moveToNext());
         }
@@ -203,7 +207,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NAME, teacher.getName());
         values.put(COLUMN_EMAIL, teacher.getEmail());
         values.put(COLUMN_PHONE, teacher.getPhone());
-
+        values.put(COLUMN_TEACHER_IMAGE_URI, teacher.getImageUri() != null ? teacher.getImageUri().toString() : null);
         int rowsAffected = db.update(TABLE_TEACHERS, values, COLUMN_TEACHER_ID + " = ?",
                 new String[]{String.valueOf(teacher.getId())});
         db.close();
@@ -216,7 +220,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Reset database (xóa cả 2 bảng)
     public void resetDatabase() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_CLASSES);

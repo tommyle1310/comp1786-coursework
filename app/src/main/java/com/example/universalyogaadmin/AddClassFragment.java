@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 public class AddClassFragment extends Fragment {
 
@@ -27,7 +28,7 @@ public class AddClassFragment extends Fragment {
     private Button addClassButton, selectImageButton;
     private ImageView courseImageView;
     private Uri imageUri;
-    private File imageFile; // File lưu hình ảnh trong bộ nhớ nội bộ
+    private File imageFile;
     private DatabaseHelper dbHelper;
 
     private final ActivityResultLauncher<String> pickImageLauncher = registerForActivityResult(
@@ -36,7 +37,6 @@ public class AddClassFragment extends Fragment {
                 if (uri != null) {
                     imageUri = uri;
                     courseImageView.setImageURI(uri);
-                    // Sao chép hình ảnh vào bộ nhớ nội bộ
                     try {
                         imageFile = saveImageToInternalStorage(uri);
                     } catch (Exception e) {
@@ -50,10 +50,8 @@ public class AddClassFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_class, container, false);
 
-        // Khởi tạo DatabaseHelper
         dbHelper = new DatabaseHelper(requireContext());
 
-        // Ánh xạ các view
         courseImageView = view.findViewById(R.id.courseImageView);
         selectImageButton = view.findViewById(R.id.selectImageButton);
         classNameEditText = view.findViewById(R.id.classNameEditText);
@@ -66,14 +64,14 @@ public class AddClassFragment extends Fragment {
         descriptionEditText = view.findViewById(R.id.descriptionEditText);
         addClassButton = view.findViewById(R.id.addClassButton);
 
-        // Xử lý chọn hình ảnh
         selectImageButton.setOnClickListener(v -> pickImageLauncher.launch("image/*"));
 
-        // Setup Spinner cho Teacher
-        ArrayAdapter<CharSequence> teacherAdapter = ArrayAdapter.createFromResource(
+        // Setup Spinner cho Teacher (dùng danh sách từ database)
+        List<Teacher> teacherList = dbHelper.getAllTeachers();
+        ArrayAdapter<Teacher> teacherAdapter = new ArrayAdapter<>(
                 requireContext(),
-                R.array.teachers_array,
-                R.layout.spinner_item
+                R.layout.spinner_item,
+                teacherList
         );
         teacherAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         teacherSpinner.setAdapter(teacherAdapter);
@@ -87,19 +85,18 @@ public class AddClassFragment extends Fragment {
         durationAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         durationSpinner.setAdapter(durationAdapter);
 
-        // Xử lý nút Add Class
         addClassButton.setOnClickListener(v -> {
             String className = classNameEditText.getText().toString().trim();
             String classType = classTypeEditText.getText().toString().trim();
-            String teacherName = teacherSpinner.getSelectedItem().toString();
+            Teacher selectedTeacher = (Teacher) teacherSpinner.getSelectedItem();
+            String teacherName = selectedTeacher != null ? selectedTeacher.getName() : "";
             String classTime = timeEditText.getText().toString().trim();
             String capacityStr = capacityEditText.getText().toString().trim();
             String priceStr = priceEditText.getText().toString().trim();
             String duration = durationSpinner.getSelectedItem().toString();
             String description = descriptionEditText.getText().toString().trim();
 
-            // Kiểm tra dữ liệu đầu vào
-            if (className.isEmpty() || classType.isEmpty() || classTime.isEmpty() || capacityStr.isEmpty() || priceStr.isEmpty() || description.isEmpty()) {
+            if (className.isEmpty() || classType.isEmpty() || teacherName.isEmpty() || classTime.isEmpty() || capacityStr.isEmpty() || priceStr.isEmpty() || description.isEmpty()) {
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -113,18 +110,14 @@ public class AddClassFragment extends Fragment {
                 return;
             }
 
-            // Tạo đối tượng YogaClass
             YogaClass yogaClass = new YogaClass(teacherName, className, classType, classTime, price, capacity, duration, description);
-            // Lưu đường dẫn file hình ảnh (nếu có)
             if (imageFile != null) {
                 yogaClass.setImageUri(Uri.fromFile(imageFile));
             }
 
-            // Lưu vào database
             long id = dbHelper.addClass(yogaClass);
             if (id != -1) {
                 Toast.makeText(requireContext(), "Class added successfully", Toast.LENGTH_SHORT).show();
-                // Quay lại MainActivity để cập nhật danh sách
                 requireActivity().finish();
             } else {
                 Toast.makeText(requireContext(), "Failed to add class", Toast.LENGTH_SHORT).show();
@@ -134,7 +127,6 @@ public class AddClassFragment extends Fragment {
         return view;
     }
 
-    // Phương thức sao chép hình ảnh vào bộ nhớ nội bộ
     private File saveImageToInternalStorage(Uri uri) throws Exception {
         File directory = new File(requireContext().getFilesDir(), "images");
         if (!directory.exists()) {

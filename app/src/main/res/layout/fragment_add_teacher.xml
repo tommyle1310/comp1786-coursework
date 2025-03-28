@@ -9,6 +9,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Teacher Image -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teacher Image"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"/>
+
+        <ImageView
+            android:id="@+id/teacherImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Select teacher image" />
+
         <!-- Teacher Name -->
         <TextView
             android:layout_width="wrap_content"

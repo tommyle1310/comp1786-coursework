@@ -76,10 +76,8 @@ public class ListClassActivity extends AppCompatActivity {
 
     private boolean checkPermission() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            // Android 13+: Sử dụng READ_MEDIA_IMAGES
             return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED;
         } else {
-            // Android 12 trở xuống: Sử dụng READ_EXTERNAL_STORAGE
             return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
         }
     }
@@ -99,9 +97,8 @@ public class ListClassActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 setupRecyclerView();
             } else {
-                // Quyền bị từ chối, hiển thị thông báo
                 Toast.makeText(this, "Storage permission is required to display class images", Toast.LENGTH_LONG).show();
-                setupRecyclerView(); // Vẫn hiển thị danh sách, nhưng hình ảnh có thể không tải được
+                setupRecyclerView();
             }
         }
     }
@@ -129,12 +126,27 @@ public class ListClassActivity extends AppCompatActivity {
 
             @Override
             public void onEditClick(YogaClass yogaClass) {
-                // Không sử dụng trong ListClassActivity
+                Intent intent = new Intent(ListClassActivity.this, EditClassActivity.class);
+                intent.putExtra("id", yogaClass.getId());
+                intent.putExtra("teacherName", yogaClass.getTeacherName());
+                intent.putExtra("className", yogaClass.getClassName());
+                intent.putExtra("classType", yogaClass.getClassType());
+                intent.putExtra("classTime", yogaClass.getClassTime());
+                intent.putExtra("price", yogaClass.getPrice());
+                intent.putExtra("capacity", yogaClass.getCapacity());
+                intent.putExtra("duration", yogaClass.getDuration());
+                intent.putExtra("description", yogaClass.getDescription());
+                String imageUriString = yogaClass.getImageUri() != null ? yogaClass.getImageUri().toString() : null;
+                intent.putExtra("imageUri", imageUriString);
+                startActivity(intent);
             }
 
             @Override
             public void onDeleteClick(YogaClass yogaClass) {
-                // Không sử dụng trong ListClassActivity
+                dbHelper.deleteClass(yogaClass.getId());
+                classList.remove(yogaClass);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(ListClassActivity.this, "Class deleted successfully", Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(adapter);
@@ -143,7 +155,6 @@ public class ListClassActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Cập nhật danh sách khi quay lại từ EditClassActivity hoặc AddActivity
         classList.clear();
         classList.addAll(dbHelper.getAllClasses());
         Log.d("ListClassActivity", "onResume: classList size = " + classList.size());

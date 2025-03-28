@@ -2,58 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="16dp"
-    android:background="@drawable/outline_background"
-    android:layout_marginBottom="8dp">
+    android:layout_marginBottom="8dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/rounded_background"
+    android:elevation="2dp">
 
-    <TextView
-        android:id="@+id/teacherNameTextView"
-        android:layout_width="wrap_content"
+    <!-- Cột 1: Image và thông tin teacher -->
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Teacher Name"
-        android:textSize="18sp"
-        android:textColor="@color/text_primary"
-        android:layout_marginBottom="4dp"/>
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/teacherEmailTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email"
-        android:textSize="14sp"
-        android:textColor="@color/text_secondary"
-        android:layout_marginBottom="4dp"/>
+        <!-- Image teacher -->
+        <ImageView
+            android:id="@+id/teacherImageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="12dp" />
 
-    <TextView
-        android:id="@+id/teacherPhoneTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Phone"
-        android:textSize="14sp"
-        android:textColor="@color/text_secondary"
-        android:layout_marginBottom="8dp"/>
+        <!-- Thông tin teacher (name và email - phone) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/teacherNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teacher Name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/teacherContactTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="email - phone"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Cột 2: Icon Edit và Delete -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/editButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            android:backgroundTint="@color/primary"
-            android:textColor="@android:color/white"
-            android:layout_marginEnd="8dp"/>
+        <ImageView
+            android:id="@+id/editIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_edit"
+            android:tint="@color/secondary"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Edit teacher" />
 
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            android:backgroundTint="@color/danger"
-            android:textColor="@android:color/white"/>
+        <ImageView
+            android:id="@+id/deleteIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_delete"
+            android:tint="@color/danger"
+            android:contentDescription="Delete teacher" />
     </LinearLayout>
 </LinearLayout>

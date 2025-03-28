@@ -1,10 +1,13 @@
 package com.example.universalyogaadmin;
 
+import android.net.Uri;
+
 public class Teacher {
     private int id;
     private String name;
     private String email;
     private String phone;
+    private Uri imageUri; // Thêm trường imageUri
 
     public Teacher(String name, String email, String phone) {
         this.name = name;
@@ -12,7 +15,6 @@ public class Teacher {
         this.phone = phone;
     }
 
-    // Getters và Setters
     public int getId() {
         return id;
     }
@@ -43,6 +45,14 @@ public class Teacher {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Uri getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(Uri imageUri) {
+        this.imageUri = imageUri;
     }
 
     @Override

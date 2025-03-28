@@ -16,8 +16,8 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
 
     public interface OnClassClickListener {
         void onClassClick(YogaClass yogaClass);
-        void onEditClick(YogaClass yogaClass); // Không sử dụng trong MainActivity và ListClassActivity
-        void onDeleteClick(YogaClass yogaClass); // Không sử dụng trong MainActivity và ListClassActivity
+        void onEditClick(YogaClass yogaClass);
+        void onDeleteClick(YogaClass yogaClass);
     }
 
     public ClassAdapter(List<YogaClass> classList, OnClassClickListener listener) {
@@ -36,37 +36,26 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
     @Override
     public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
         YogaClass yogaClass = classList.get(position);
-        // Hiển thị thông tin theo Figma
-        if (holder.classNameTextView != null) {
-            holder.classNameTextView.setText(yogaClass.getClassName());
-        }
-        if (holder.priceTextView != null) {
-            holder.priceTextView.setText("$" + yogaClass.getPrice());
-        }
-        if (holder.capacityTextView != null) {
-            holder.capacityTextView.setText(yogaClass.getCapacity() + " people");
-        }
-        if (holder.timeTextView != null) {
-            holder.timeTextView.setText(yogaClass.getClassTime());
+
+        // Gán dữ liệu cho các view
+        holder.classNameTextView.setText(yogaClass.getClassName());
+        holder.priceTextView.setText("$" + yogaClass.getPrice());
+        holder.capacityTextView.setText(yogaClass.getCapacity() + " people");
+        holder.timeTextView.setText(yogaClass.getClassTime());
+
+        // Hiển thị hình ảnh nếu có
+        if (yogaClass.getImageUri() != null) {
+            holder.classImageView.setImageURI(yogaClass.getImageUri());
         }
 
-        // Hiển thị ảnh của lớp học
-        if (holder.classImageView != null) {
-            if (yogaClass.getImageUri() != null) {
-                android.util.Log.d("ClassAdapter", "Loading image URI: " + yogaClass.getImageUri());
-                try {
-                    holder.classImageView.setImageURI(yogaClass.getImageUri());
-                } catch (SecurityException e) {
-                    holder.classImageView.setImageResource(R.drawable.default_image);
-                    android.util.Log.e("ClassAdapter", "Failed to load class image: " + yogaClass.getImageUri(), e);
-                }
-            } else {
-                android.util.Log.d("ClassAdapter", "Image URI is null for class: " + yogaClass.getClassName());
-                holder.classImageView.setImageResource(R.drawable.default_image);
-            }
-        }
-
+        // Sự kiện click vào item
         holder.itemView.setOnClickListener(v -> listener.onClassClick(yogaClass));
+
+        // Sự kiện click vào icon Edit
+        holder.editIcon.setOnClickListener(v -> listener.onEditClick(yogaClass));
+
+        // Sự kiện click vào icon Delete
+        holder.deleteIcon.setOnClickListener(v -> listener.onDeleteClick(yogaClass));
     }
 
     @Override
@@ -75,16 +64,18 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
     }
 
     static class ClassViewHolder extends RecyclerView.ViewHolder {
-        ImageView classImageView;
         TextView classNameTextView, priceTextView, capacityTextView, timeTextView;
+        ImageView classImageView, editIcon, deleteIcon;
 
         public ClassViewHolder(@NonNull View itemView) {
             super(itemView);
-            classImageView = itemView.findViewById(R.id.classImageView);
             classNameTextView = itemView.findViewById(R.id.classNameTextView);
             priceTextView = itemView.findViewById(R.id.priceTextView);
             capacityTextView = itemView.findViewById(R.id.capacityTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
+            classImageView = itemView.findViewById(R.id.classImageView);
+            editIcon = itemView.findViewById(R.id.editIcon);
+            deleteIcon = itemView.findViewById(R.id.deleteIcon);
         }
     }
 }

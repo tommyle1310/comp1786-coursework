@@ -9,191 +9,178 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Course Image -->
+        <!-- Class Image -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Course Image"
+            android:text="Class Image"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/courseImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_teacher_placeholder"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/image_border"
-            android:padding="2dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery" />
 
         <Button
             android:id="@+id/selectImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Image"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginTop="8dp"
+            android:text="Select Class Image" />
 
         <!-- Class Name -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Class Name"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/classNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/outline_background"
-            android:padding="12dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/edit_text_background"
             android:hint="Enter class name"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/text_primary"
-            android:inputType="text"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Class Type -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Class Type"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/classTypeEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/outline_background"
             android:padding="12dp"
-            android:hint="Enter class type"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/text_primary"
-            android:inputType="text"
-            android:layout_marginBottom="16dp"/>
+            android:textColor="@color/text_primary" />
 
-        <!-- Teacher -->
+        <!-- Teacher Name (Spinner) -->
         <TextView
-            android:id="@+id/teacherLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teacher"
+            android:layout_marginTop="8dp"
+            android:text="Teacher Name"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="14sp" />
 
         <Spinner
             android:id="@+id/teacherSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginTop="4dp"
+            android:padding="12dp"
+            android:textColor="@color/text_primary" />
 
-        <!-- Time -->
+        <!-- Class Type -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time"
+            android:layout_marginTop="8dp"
+            android:text="Class Type"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/classTypeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Enter class type"
+            android:padding="12dp"
+            android:textColor="@color/text_primary" />
+
+        <!-- Class Time -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Class Time"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/timeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/outline_background"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="e.g., 10:00AM - 11:00AM"
             android:padding="12dp"
-            android:hint="Enter time"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/text_primary"
-            android:inputType="time"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Capacity -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Capacity"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/capacityEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/outline_background"
-            android:padding="12dp"
-            android:hint="Enter capacity"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/text_primary"
-            android:inputType="number"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Duration -->
-        <TextView
-            android:id="@+id/durationLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Duration"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp"/>
-
-        <Spinner
-            android:id="@+id/durationSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"/>
+            android:textColor="@color/text_primary" />
 
         <!-- Price -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Price"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/priceEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/outline_background"
-            android:padding="12dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/edit_text_background"
             android:hint="Enter price"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/text_primary"
-            android:inputType="numberDecimal"
-            android:layout_marginBottom="16dp"/>
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColor="@color/text_primary" />
+
+        <!-- Capacity -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Capacity"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/capacityEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Enter capacity"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColor="@color/text_primary" />
+
+        <!-- Duration -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Duration"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <Spinner
+            android:id="@+id/durationSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp" />
 
         <!-- Description -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Description"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/descriptionEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/outline_background"
-            android:padding="12dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/edit_text_background"
             android:hint="Enter description"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/text_primary"
-            android:inputType="textMultiLine"
-            android:minLines="3"
-            android:layout_marginBottom="16dp"/>
+            android:padding="12dp"
+            android:textColor="@color/text_primary" />
 
         <!-- Add Class Button -->
         <Button
@@ -203,6 +190,6 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/primary"
             android:text="Add Class"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </ScrollView>

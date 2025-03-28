@@ -6,6 +6,7 @@
     android:padding="16dp"
     android:background="@drawable/rounded_background"
     android:layout_marginBottom="8dp"
+    android:gravity="center_vertical"
     android:elevation="2dp">
 
     <!-- Ảnh của lớp học (bên trái) -->
@@ -23,7 +24,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:elevation="3dp"
         android:orientation="horizontal">
 
         <!-- Cột 1: className và price -->
@@ -79,20 +79,27 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Icon Edit và Delete (ẩn đi) -->
-    <ImageView
-        android:id="@+id/editIcon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@android:drawable/ic_menu_edit"
-        android:visibility="gone"
-        android:layout_marginEnd="8dp" />
+    <!-- Icon Edit và Delete -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/deleteIcon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@android:drawable/ic_menu_delete"
-        android:visibility="gone" />
+        <ImageView
+            android:id="@+id/editIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_edit"
+            android:tint="@color/secondary"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Edit class" />
 
+        <ImageView
+            android:id="@+id/deleteIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_delete"
+            android:tint="@color/danger"
+            android:contentDescription="Delete class" />
+    </LinearLayout>
 </LinearLayout>
